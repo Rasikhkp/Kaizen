@@ -19,7 +19,7 @@ export default function Home() {
     return (
         <>
             <nav
-                className={`${aileron.className} flex z-50 aileron justify-between bg-white/70 backdrop-blur fixed w-full top-0 p-6 items-center max-w-screen-xl`}>
+                className={`${aileron.className} flex z-50 aileron justify-between bg-white/70 backdrop-blur fixed w-full top-0 py-6 px-12 items-center max-w-screen-xl`}>
 
                 <div className="flex gap-4">
                     <div className="h-10 w-10 relative object-cover">
@@ -98,7 +98,7 @@ export default function Home() {
                     </div>
                 </section>
 
-                <footer className={`${poppins.className} text-gray-300 px-10 bg-[#111111]`}>
+                <footer className={`${poppins.className} text-gray-300 px-12 bg-[#111111]`}>
                     <div className="flex justify-between items-center py-6">
                         <div className="flex gap-4">
                             <div className="h-10 w-10 relative object-cover">
