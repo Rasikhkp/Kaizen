@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"
 
 const Nav = () => {
     const pathName = usePathname();
-    console.log(pathName)
+
     return (
         <nav
             className={`z-50 bg-white/70 backdrop-blur fixed w-full top-0`}>

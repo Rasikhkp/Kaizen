@@ -6,7 +6,7 @@ import sparkGreen from "@/public/sparkGreen.svg"
 import { useEffect, useState } from 'react'
 
 const Spark = ({ className, color }: { className?: string; color: "blue" | "green" }) => {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+    const [windowWidth, setWindowWidth] = useState(0)
 
     useEffect(() => {
         const handleResize = () => {
