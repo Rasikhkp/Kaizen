@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { hey_comic } from "./fonts";
+import { inter } from "./fonts";
+import Nav from "./_components/nav";
+import Footer from "./_components/footer";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -14,7 +16,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={hey_comic.className}>{children}</body>
+            <body className={`${inter.className} relative`}>
+                <Nav />
+                {children}
+                <Footer />
+            </body>
         </html>
     );
 }
