@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: "Environment Kaizen | Wajah cantik bersama bumi yang bersih",
     description: "Wajah cantik bersama bumi yang bersih",
     icons: {
-        icon: ['../public/bumi.png']
+        icon: 'bumi.png'
     }
 };
 
