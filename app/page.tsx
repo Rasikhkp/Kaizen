@@ -10,7 +10,7 @@ export default function Home() {
     return (
         <div className="overflow-x-clip relative">
             <main className={`${hey_comic.className} max-w-screen-xl mx-auto flex flex-col items-center`}>
-                <section className="flex relative justify-center items-center gap-28 h-screen">
+                <section className="flex relative justify-center items-center gap-28 h-[70vh]">
                     <div className="w-52 lg:w-80 relative text-center">
                         <Spark className="absolute -top-8 left-0 md:-left-10" color="blue" />
                         <Spark className="absolute -bottom-8 md:-bottom-10 right-0 md:-right-10" color="blue" />
@@ -28,7 +28,7 @@ export default function Home() {
 
                 </section>
 
-                <div className="absolute top-[70vh] md:top-[80vh] -right-52 md:-right-80 w-[400px] md:w-[600px] lg:w-[700px] h-96">
+                <div className="absolute top-[40vh] md:top-[50vh] -right-52 md:-right-80 w-[400px] md:w-[600px] lg:w-[700px] h-96">
                     <Image src={blobBlue} alt="blob blue" fill />
                 </div>
 
@@ -51,7 +51,7 @@ export default function Home() {
 
                 </section>
 
-                <div className="absolute top-[165vh] md:top-[180vh] -left-52 md:-left-80 w-[400px] md:w-[600px] lg:w-[700px] h-96">
+                <div className="absolute top-[135vh] md:top-[150vh] -left-52 md:-left-80 w-[400px] md:w-[600px] lg:w-[700px] h-96">
                     <Image src={blobGreen} alt="blob green" fill />
                 </div>
 
