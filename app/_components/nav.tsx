@@ -12,7 +12,7 @@ const Nav = () => {
     return (
         <nav
             className={`z-50 bg-white/70 backdrop-blur fixed w-full top-0`}>
-            <div className='max-w-screen-lg w-full flex justify-between items-center mx-auto p-4 md:px-12 md:py-6'>
+            <div className='max-w-screen-lg w-full flex justify-between items-center mx-auto p-4 md:px-4 md:py-6'>
                 <div className="flex gap-4">
                     <div className="h-8 w-8 md:h-10 md:w-10 relative object-cover">
                         <Image src={logoKaizen} fill alt="logo kaizen" />

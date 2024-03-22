@@ -40,8 +40,8 @@ const Menu = () => {
             {openMenu && (
                 <div className='h-screen w-full bg-white absolute left-0 pt-10 top-12 px-4 '>
                     <div className='border border-slate-200 rounded-xl'>
-                        <button onClick={() => move("/")} className='border-b p-4 border-slate-200 text-start w-full'>Home</button>
-                        <button onClick={() => move("/blog")} className='p-4 w-full text-start'>Blog</button>
+                        <button onClick={() => move("/")} className='border-b p-4 hover:bg-slate-100 border-slate-200 text-start w-full active:bg-slate-200'>Home</button>
+                        <button onClick={() => move("/blog")} className='p-4 w-full text-start hover:bg-slate-100 active:bg-slate-200'>Blog</button>
                     </div>
                 </div>
             )}

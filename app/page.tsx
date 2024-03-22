@@ -1,29 +1,20 @@
 import Image from "next/image";
-import logoKaizen from "@/public/bumi.png"
 import ourLogo from "@/public/our logo clean.png"
 import cewe from "@/public/cewe.png"
 import Spark from "./_components/spark";
-import { adelia, aileron, hey_comic, inter, poppins } from "./fonts";
-import tiktokWhite from '@/public/tiktok-white.svg'
-import igWhite from '@/public/ig-white.svg'
-import emailWhite from '@/public/email-white.svg'
+import { adelia, hey_comic } from "./fonts";
 import blobBlue from '@/public/blob-blue.svg'
 import blobGreen from '@/public/blob-green.svg'
-import Link from "next/link";
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import Menu from "./_components/menu";
-import Nav from "./_components/nav";
-import Footer from "./_components/footer";
 
 export default function Home() {
     return (
         <div className="overflow-x-clip relative">
             <main className={`${hey_comic.className} max-w-screen-xl mx-auto flex flex-col items-center`}>
                 <section className="flex relative justify-center items-center gap-28 h-screen">
-                    <div className="w-40 md:w-52 lg:w-80 relative text-center ">
+                    <div className="w-52 lg:w-80 relative text-center">
                         <Spark className="absolute -top-8 left-0 md:-left-10" color="blue" />
                         <Spark className="absolute -bottom-8 md:-bottom-10 right-0 md:-right-10" color="blue" />
-                        <div className={`${adelia.className} text-[32px] md:text-[52px] lg:text-[72px] leading-none`}>XXX XXX</div>
+                        <div className={`${adelia.className} w-40 text-[32px] mx-auto md:text-[52px] lg:text-[72px] leading-none`}>XXX XXX</div>
 
                         <div className="text-base md:text-lg lg:text-2xl mt-5">Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
                             cillum sint
@@ -41,11 +32,18 @@ export default function Home() {
                     <Image src={blobBlue} alt="blob blue" fill />
                 </div>
 
-                <section className="h-screen flex flex-col lg:flex-row items-center items-center justify-center relative gap-20 lg:gap-28 w-full">
+                <section className="h-screen flex flex-col lg:flex-row items-center items-center justify-center relative gap-8 lg:gap-28 w-full">
+                    <div className={`${adelia.className} lg:hidden z-10 relative text-[#86A964] text-[32px] md:text-[52px] lg:text-[72px] leading-none relative w-28 md:w-40 lg:w-60 drop-shadow-sm`} style={{ textShadow: "4px 4px #4D715F" }}>
+                        OUR LOGO
+                        <Spark className="absolute z-20 -top-10 -left-10" color="green" />
+                        <Spark className="absolute -bottom-9 md:-bottom-11 -right-8 md:-right-10" color="green" />
+                    </div>
+
                     <div className="relative">
                         <Image className="object-cover" src={ourLogo} width={500} alt="our logo" />
                     </div>
-                    <div className={`${adelia.className} z-10 relative text-[#86A964] text-[32px] md:text-[52px] lg:text-[72px] leading-none relative w-28 md:w-40 lg:w-60 drop-shadow-sm`} style={{ textShadow: "4px 4px #4D715F" }}>
+
+                    <div className={`${adelia.className} hidden lg:block z-10 relative text-[#86A964] text-[32px] md:text-[52px] lg:text-[72px] leading-none relative w-28 md:w-40 lg:w-60 drop-shadow-sm`} style={{ textShadow: "4px 4px #4D715F" }}>
                         OUR LOGO
                         <Spark className="absolute z-20 -top-10 -left-10" color="green" />
                         <Spark className="absolute -bottom-9 md:-bottom-11 -right-8 md:-right-10" color="green" />
