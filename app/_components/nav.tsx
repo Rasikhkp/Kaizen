@@ -9,6 +9,11 @@ import { usePathname } from "next/navigation"
 const Nav = () => {
     const pathName = usePathname();
 
+    const checkPath = (path: string) => {
+        if (pathName.match(path)) return true
+
+    }
+
     return (
         <nav
             className={`z-50 bg-white/70 backdrop-blur fixed w-full top-0`}>
@@ -24,8 +29,8 @@ const Nav = () => {
                 </div>
 
                 <div className="gap-10 font-medium hidden md:flex text-sm">
-                    <Link href={'/'} className={`${pathName === "/" && "underline underline-offset-4"}`}>Home</Link>
-                    <Link href={'/blog'} className={`${pathName === "/blog" && "underline underline-offset-4"}`}>Blog</Link>
+                    <Link href={'/'} className={`${pathName.match(/^\/$/) && "underline underline-offset-4"}`}>Home</Link>
+                    <Link href={'/blog'} className={`${pathName.match(/^\/blog(?:\/|$)/) && "underline underline-offset-4"}`}>Blog</Link>
                 </div>
 
                 <Menu />
