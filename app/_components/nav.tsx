@@ -25,7 +25,7 @@ const Nav = () => {
 
                 <div className="gap-10 font-medium hidden md:flex text-sm">
                     <Link href={'/'} className={`${pathName === "/" && "underline underline-offset-4"}`}>Home</Link>
-                    <Link href={'/blog'} className={pathName === "/blog" && "underline underline-offset-4"}>Blog</Link>
+                    <Link href={'/blog'} className={`${pathName === "/blog" && "underline underline-offset-4"}`}>Blog</Link>
                 </div>
 
                 <Menu />

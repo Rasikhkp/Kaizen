@@ -1,10 +1,12 @@
 "use client"
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 const Menu = () => {
     const [openMenu, setOpenMenu] = useState(false)
+    const router = useRouter()
 
     const toggle = () => {
         setOpenMenu(!openMenu)
@@ -20,6 +22,11 @@ const Menu = () => {
 
     }
 
+    const move = (path: string) => {
+        router.push(path)
+        toggle()
+    }
+
     return (
         <div className='md:hidden'>
             <button type='button' onClick={toggle}>
@@ -33,8 +40,8 @@ const Menu = () => {
             {openMenu && (
                 <div className='h-screen w-full bg-white absolute left-0 pt-10 top-12 px-4 '>
                     <div className='border border-slate-200 rounded-xl'>
-                        <div className='border-b p-4 border-slate-200'>Home</div>
-                        <div className='p-4'>Blog</div>
+                        <button onClick={() => move("/")} className='border-b p-4 border-slate-200 text-start w-full'>Home</button>
+                        <button onClick={() => move("/blog")} className='p-4 w-full text-start'>Blog</button>
                     </div>
                 </div>
             )}
