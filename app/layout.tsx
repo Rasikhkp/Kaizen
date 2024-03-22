@@ -6,7 +6,7 @@ import Footer from "./_components/footer";
 import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
-    title: "Environment Kaizen | Wajah cantik bersama bumi yang bersih",
+    title: "Environment Kaizen | Wajah Cantik Bersama Bumi Yang Bersih",
     description: "Wajah cantik bersama bumi yang bersih",
     icons: {
         icon: 'bumi.png'
