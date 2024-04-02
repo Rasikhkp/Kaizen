@@ -5,23 +5,22 @@ import { UploadDropzone } from "@uploadthing/react";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
-import defaultImage from "@/public/default-placeholder.png"
+import defaultImage from "@/public/default-placeholder.png";
 
 export default function Home() {
-    const [url, setUrl] = useState('')
-    const [key, setKey] = useState('')
+    const [url, setUrl] = useState("");
+    const [key, setKey] = useState("");
 
     const deleteImage = async () => {
-
         const options = {
-            method: 'POST',
-            url: 'https://uploadthing.com/api/deleteFile',
+            method: "POST",
+            url: "https://uploadthing.com/api/deleteFile",
             headers: {
-                'Content-Type': 'application/json',
-                'X-Uploadthing-Api-Key': 'sk_live_bb4eef2612fda49943764f455bfd6444d45053baa4639bdcee6886016b73c9b3',
-                'X-Uploadthing-Version': '6.4.0'
+                "Content-Type": "application/json",
+                "X-Uploadthing-Api-Key": process.env.UPLOADTHING_SECRET,
+                "X-Uploadthing-Version": "6.4.0",
             },
-            data: { fileKeys: [key] }
+            data: { fileKeys: [key] },
         };
 
         try {
@@ -30,21 +29,31 @@ export default function Home() {
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24 ">
             <div className="h-60 w-80 mb-10 rounded-2xl  relative  overflow-hidden">
-                <Image src={url || defaultImage} alt="fuck" className="object-cover" fill />
+                <Image
+                    src={url || defaultImage}
+                    alt="fuck"
+                    className="object-cover"
+                    fill
+                />
             </div>
-            <button onClick={deleteImage} className="py-2 px-4 bg-red-300 text-white font-medium mb-10">delete</button>
+            <button
+                onClick={deleteImage}
+                className="py-2 px-4 bg-red-300 text-white font-medium mb-10"
+            >
+                delete
+            </button>
             <UploadButton
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                     // Do something with the response
                     console.log("Files: ", res);
-                    setUrl(res[0].url)
-                    setKey(res[0].key)
+                    setUrl(res[0].url);
+                    setKey(res[0].key);
                 }}
                 onUploadError={(error: Error) => {
                     // Do something with the error.

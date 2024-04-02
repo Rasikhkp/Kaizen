@@ -59,7 +59,6 @@ const Tooltip = ({ id }: { id: string }) => {
                                 )}
                             </Button>
                         </div>
-
                     </div>
                 </div>
             )}
