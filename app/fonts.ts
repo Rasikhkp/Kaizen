@@ -1,10 +1,11 @@
 import localFont from "next/font/local"
-import { Inter, EB_Garamond, Poppins } from "next/font/google"; import "./globals.css";
+import { Inter, EB_Garamond, Poppins } from "next/font/google";
 
 
 export const poppins = Poppins({
     weight: ['400', '500', '700'],
     style: ['normal', 'italic'],
+    variable: "--font-poppins",
     subsets: ['latin'],
     display: 'swap',
 })
@@ -13,12 +14,14 @@ export const inter = Inter({
     weight: ['400', '500', '600', '700'],
     style: ['normal'],
     subsets: ['latin'],
+    variable: "--font-inter",
     display: 'swap',
 })
 
 export const garamond = EB_Garamond({
     weight: ['400', '500', '700'],
     style: ['normal', 'italic'],
+    variable: "--font-garamond",
     subsets: ['latin'],
     display: 'swap',
 })

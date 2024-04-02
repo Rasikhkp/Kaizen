@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import Menu from "./menu"
 import { usePathname } from "next/navigation"
+import { UserButton } from "@clerk/nextjs"
 
 const Nav = () => {
     const pathName = usePathname();
@@ -16,7 +17,7 @@ const Nav = () => {
 
     return (
         <nav
-            className={`z-50 bg-white/70 backdrop-blur fixed w-full top-0`}>
+            className={`z-20 bg-white/70 backdrop-blur fixed w-full top-0`}>
             <div className='max-w-screen-lg w-full flex justify-between items-center mx-auto p-4 md:px-4 md:py-6'>
                 <div className="flex gap-4">
                     <div className="h-8 w-8 md:h-10 md:w-10 relative object-cover">
@@ -29,8 +30,14 @@ const Nav = () => {
                 </div>
 
                 <div className="gap-10 font-medium hidden md:flex text-sm">
-                    <Link href={'/'} className={`${pathName.match(/^\/$/) && "underline underline-offset-4"}`}>Home</Link>
-                    <Link href={'/blog'} className={`${pathName.match(/^\/blog(?:\/|$)/) && "underline underline-offset-4"}`}>Blog</Link>
+                    {!pathName.includes('admin') ? (
+                        <>
+                            <Link href={'/'} className={`${pathName.match(/^\/$/) && "underline underline-offset-4"}`}>Home</Link>
+                            <Link href={'/blog'} className={`${pathName.match(/^\/blog(?:\/|$)/) && "underline underline-offset-4"}`}>Blog</Link>
+                        </>
+                    ) : (
+                        <UserButton />
+                    )}
                 </div>
 
                 <Menu />

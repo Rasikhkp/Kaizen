@@ -9,12 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.9",
     "@heroicons/react": "^2.1.1",
+    "@prisma/client": "^5.11.0",
+    "@tinymce/tinymce-react": "^4.3.2",
+    "@uploadthing/react": "^6.4.1",
+    "axios": "^1.6.8",
     "boxicons": "^2.1.4",
     "next": "14.1.3",
     "nextjs-toploader": "^1.6.11",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.51.1",
+    "react-quill": "^2.0.0",
+    "react-spinners": "^0.13.8",
+    "react-tooltip": "^5.26.3",
+    "tailwind-scrollbar": "^3.1.0",
+    "uploadthing": "^6.7.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
@@ -25,6 +36,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.3",
     "postcss": "^8",
+    "prisma": "^5.11.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
