@@ -1,25 +1,40 @@
 "use client";
 
+import { updateDraft } from "@/redux/features/draft-slice";
+import { RootState, getAllDraft } from "@/redux/store";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.bubble.css";
+import { useDispatch, useSelector } from "react-redux";
+import { BeatLoader } from "react-spinners";
 
-const TextField = ({
-    id,
-    draftedContent,
-    draftedTitle,
-}: {
-    id: string;
-    draftedTitle: string;
-    draftedContent: string;
-}) => {
-    const [content, setContent] = useState(draftedContent);
-    const [title, setTitle] = useState(draftedTitle);
+const TextField = ({ id, }: { id: string }) => {
+    const [content, setContent] = useState('');
+    const [title, setTitle] = useState('');
     const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
     const [isSaving, setIsSaving] = useState(false);
+    const [isFetching, setIsFetching] = useState(true)
+    const dispatch = useDispatch()
+    const draft = useSelector((state: RootState) => state.draft.values.find((val) => val.id === id))
+    const drafts = useSelector(getAllDraft)
 
     useEffect(() => {
+        const fetchDraft = async () => {
+            const { data } = await axios.get("/api/draft/" + id)
+            setContent(data.content)
+            setTitle(data.title)
+            setIsFetching(false)
+        }
+
+        fetchDraft()
+    }, [])
+
+    useEffect(() => {
+        if (isFetching) {
+            return
+        }
+
         var textarea = document.querySelector("textarea")!;
 
         const textareaAutoResize = () => {
@@ -32,7 +47,7 @@ const TextField = ({
         textarea.addEventListener("input", textareaAutoResize);
 
         return () => textarea?.removeEventListener("input", textareaAutoResize);
-    }, []);
+    }, [isFetching]);
 
     useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -48,16 +63,20 @@ const TextField = ({
             window.removeEventListener("beforeunload", handleBeforeUnload);
     }, [isSaving]);
 
+
+
     const saveDraft = async (titleDraft: string, contentDraft: string) => {
         setIsSaving(true);
 
         try {
-            await axios.patch("/api/draft/" + id, {
+            const { data } = await axios.patch("/api/draft/" + id, {
                 title: titleDraft,
                 content: contentDraft,
                 imageKey: '',
                 imageUrl: ''
             });
+
+            dispatch(updateDraft(data))
             console.log("Draft saved successfully!");
         } catch (error) {
             console.error("Error saving draft:", error);
@@ -106,27 +125,41 @@ const TextField = ({
                 </div>
             )}
 
-            <textarea
-                className="w-full pl-4 mb-4 font-serif text-5xl border-l border-white outline-none peer focus:border-slate-300"
-                rows={1}
-                onChange={(e) => updateTitle(e.target.value)}
-                placeholder="Title"
-                style={{ resize: "none" }}
-            >
-                {title}
-            </textarea>
+            {isFetching ? (
+                <div className="w-full mt-10 flex justify-center">
+                    <BeatLoader
+                        loading={true}
+                        color="#000"
+                        size={16}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
+            ) : (
+                <>
+                    <textarea
+                        className="w-full pl-4 mb-4 font-serif text-5xl border-l border-white outline-none peer focus:border-slate-300"
+                        rows={1}
+                        value={title}
+                        onChange={(e) => updateTitle(e.target.value)}
+                        placeholder="Title"
+                        style={{ resize: "none" }}
+                    >
+                    </textarea>
 
-            <div className="peer-focus:after:content-['Title'] text-xs absolute -left-10 text-slate-600 top-14">
-                {" "}
-            </div>
+                    <div className="peer-focus:after:content-['Title'] text-xs absolute -left-10 text-slate-600 top-14">
+                        {" "}
+                    </div>
 
-            <ReactQuill
-                theme="bubble"
-                value={content}
-                onChange={(val) => updateContent(val)}
-                placeholder="Your stories..."
-                className="mb-40"
-            />
+                    <ReactQuill
+                        theme="bubble"
+                        value={content}
+                        onChange={(val) => updateContent(val)}
+                        placeholder="Your stories..."
+                        className="mb-40"
+                    />
+                </>
+            )}
         </>
     );
 };

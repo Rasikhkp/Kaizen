@@ -27,7 +27,9 @@ const PostItem = ({ draft }: { draft: Draft }) => {
 
     const getLastEdited = () => {
         const currentDate = new Date();
-        const diff = currentDate.getTime() - draft.updatedAt.getTime();
+        const updatedAt = new Date(draft.updatedAt)
+        const diff = currentDate.getTime() - updatedAt.getTime();
+
         const seconds = Math.floor(diff / 1000);
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
@@ -55,7 +57,7 @@ const PostItem = ({ draft }: { draft: Draft }) => {
 
     const estimateReadingTime = () => {
         const wordsPerMinute = 200;
-        const textWithoutTags = draft.content.replace(/<[^>]*>/g, ' ');
+        const textWithoutTags = draft.content!.replace(/<[^>]*>/g, ' ');
         const words = textWithoutTags.trim().split(/\s+/);
         const filteredWords = words.filter(word => word !== '');
         const wordCount = filteredWords.length;
@@ -64,12 +66,12 @@ const PostItem = ({ draft }: { draft: Draft }) => {
         return `${readingTimeMinutes} min read (${wordCount} words) so far`;
     }
 
-    const slugifyTitle = () => {
-        return draft.title.toLowerCase().split(" ").join("-")
-    }
+    // const slugifyTitle = () => {
+    //     return draft.title.toLowerCase().split(" ").join("-")
+    // }
 
     return (
-        <div className='py-4 border-b border-[#F2F2F2]'>
+        <div className='py-4 border-b border-gray-300'>
             <Link href={`/admin/${draft.id}`} className='font-bold'>{draft.title || 'Untitled'}</Link>
             <div className='flex gap-2 text-[#6B6B6B] mt-2'>
                 <div className='text-sm'>{getLastEdited()} • {estimateReadingTime()}</div>

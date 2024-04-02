@@ -1,3 +1,16 @@
+.ql-container {
+    font-family: serif !important;
+    font-size: 20px !important;
+}
+
+.ql-bubble h1 {
+    font-size: 40px !important;
+}
+
+.ql-bubble h2 {
+    font-size: 30px !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

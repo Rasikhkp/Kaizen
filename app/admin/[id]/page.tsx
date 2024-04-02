@@ -24,11 +24,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                         <PreviewButton id={id} />
                     </div>
 
-                    <TextField
-                        id={draft?.id!}
-                        draftedContent={draft?.content || ''}
-                        draftedTitle={draft?.title || ''}
-                    />
+                    <TextField id={draft?.id!} />
                 </div>
             </div>
         </>

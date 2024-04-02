@@ -1,28 +1,24 @@
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import { BeatLoader } from 'react-spinners'
+import { useDispatch } from 'react-redux'
+import { deleteDraft } from '@/redux/features/draft-slice'
+import Link from 'next/link'
 
 const Tooltip = ({ id }: { id: string }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
     const router = useRouter();
+    const dispatch = useDispatch()
 
-    const deleteDraft = async () => {
+    const handleDeleteDraft = async () => {
         setIsDeleting(true)
-        await axios.delete("/api/draft/" + id)
+
+        const { data } = await axios.delete("/api/draft/" + id)
+        dispatch(deleteDraft(data.deleted.id))
+
         setIsDeleting(false)
         setShowDeleteModal(false)
     }
@@ -32,7 +28,7 @@ const Tooltip = ({ id }: { id: string }) => {
             <div className='drop-shadow-[0_0_5px_rgba(0,0,0,0.20)] w-32 flex absolute -top-2 z-10 -left-14 flex-col items-center  mt-10 rounded' >
                 <div className='bg-white w-4 h-4 absolute rotate-45 -top-1'></div>
                 <div className='bg-white rounded text-sm font-medium py-4 px-6 flex flex-col items-start z-10 gap-2'>
-                    <button onClick={() => router.push("/admin/" + id)} className='text-slate-600 hover:text-slate-700'>Edit draft</button>
+                    <Link href={'/admin/' + id} className='text-slate-600 hover:text-slate-700'>Edit draft</Link>
                     <button onClick={() => setShowDeleteModal(true)} className='text-red-400 hover:text-red-500'>Delete draft</button>
                 </div>
             </div>
@@ -45,7 +41,7 @@ const Tooltip = ({ id }: { id: string }) => {
 
                         <div className='flex mt-4 justify-end gap-4'>
                             <Button onClick={() => setShowDeleteModal(false)} variant={'outline'}>Cancel</Button>
-                            <Button onClick={deleteDraft}>
+                            <Button onClick={handleDeleteDraft}>
                                 {isDeleting ? (
                                     <BeatLoader
                                         color='#fff'
@@ -62,9 +58,6 @@ const Tooltip = ({ id }: { id: string }) => {
                     </div>
                 </div>
             )}
-
-
-
         </>
     )
 }

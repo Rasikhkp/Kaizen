@@ -5,6 +5,7 @@ import Nav from "./_components/nav";
 import Footer from "./_components/footer";
 import NextTopLoader from "nextjs-toploader";
 import { ClerkProvider } from "@clerk/nextjs";
+import ReduxProvider from "@/redux/redux-provider";
 
 export const metadata: Metadata = {
     title: "Environment Kaizen | Wajah Cantik Bersama Bumi Yang Bersih",
@@ -26,7 +27,9 @@ export default function RootLayout({
                     <NextTopLoader showSpinner={false} />
                     <Nav />
                     <div className="pt-24">
-                        {children}
+                        <ReduxProvider>
+                            {children}
+                        </ReduxProvider>
                     </div>
                     <Footer />
                 </body>

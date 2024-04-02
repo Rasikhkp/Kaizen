@@ -12,8 +12,8 @@ export const draftSlice = createSlice({
         addDraft: (state, action: PayloadAction<Draft>) => {
             state.values.push(action.payload)
         },
-        deleteDraft: (state, action: PayloadAction<{ id: string }>) => {
-            state.values = state.values.filter(draft => draft.id !== action.payload.id)
+        deleteDraft: (state, action: PayloadAction<string>) => {
+            state.values = state.values.filter(draft => draft.id !== action.payload)
         },
         fillDraft: (state, action: PayloadAction<Draft[]>) => {
             state.values = action.payload

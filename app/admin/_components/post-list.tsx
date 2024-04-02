@@ -1,27 +1,33 @@
 "use client"
 
-import { Draft } from '@prisma/client'
+import { getAllDraft } from '@/redux/store'
+import { useDispatch, useSelector } from 'react-redux'
+import PostItem from './post-item'
+import { useEffect } from 'react'
+import { fillDraft } from '@/redux/features/draft-slice'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 
 const PostList = () => {
-    const [draft, setDraft] = useState<Draft | null>(null)
+    const draftState = useSelector(getAllDraft);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const getDrafts = async () => {
+        const fetchDrafts = async () => {
             const { data } = await axios.get("/api/draft")
-
-            setDraft(data)
+            dispatch(fillDraft(data))
         }
 
-        getDrafts()
-    })
+        fetchDrafts()
+    }, [])
+
     return (
-        {
-            drafts.map((draft) => (
-                <PostItem key={draft.id} draft={draft} />
-            ))
-        }
+        <div className='pb-12'>
+            {
+                draftState.map((draft) => (
+                    <PostItem key={draft.id} draft={draft} />
+                ))
+            }
+        </div>
     )
 }
 
