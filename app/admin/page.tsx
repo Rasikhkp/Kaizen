@@ -16,6 +16,8 @@ const page = async () => {
                 <CreateButton userId={userId} />
             </div>
 
+
+
             {drafts.map((draft) => (
                 <PostItem key={draft.id} draft={draft} />
             ))}

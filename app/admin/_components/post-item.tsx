@@ -4,15 +4,8 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import React, { useEffect, useRef, useState } from 'react'
 import Tooltip from './tooltip';
 import Link from 'next/link';
+import { Draft } from '@prisma/client';
 
-type Draft = {
-    id: string;
-    title: string;
-    content: string;
-    authorId: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
 
 const PostItem = ({ draft }: { draft: Draft }) => {
     const [openTooltip, setOpenTooltip] = useState(false)
@@ -62,7 +55,10 @@ const PostItem = ({ draft }: { draft: Draft }) => {
 
     const estimateReadingTime = () => {
         const wordsPerMinute = 200;
-        const wordCount = draft.content.split(/\s+/).length;
+        const textWithoutTags = draft.content.replace(/<[^>]*>/g, ' ');
+        const words = textWithoutTags.trim().split(/\s+/);
+        const filteredWords = words.filter(word => word !== '');
+        const wordCount = filteredWords.length;
         const readingTimeMinutes = Math.ceil(wordCount / wordsPerMinute);
 
         return `${readingTimeMinutes} min read (${wordCount} words) so far`;
@@ -84,7 +80,7 @@ const PostItem = ({ draft }: { draft: Draft }) => {
 
                     <div>
                         {openTooltip && (
-                            <Tooltip />
+                            <Tooltip id={draft.id} />
                         )}
                     </div>
                 </div>

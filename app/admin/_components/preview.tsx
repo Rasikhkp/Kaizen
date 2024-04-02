@@ -1,26 +1,22 @@
 "use client"
 
-import trash from "@/public/trash.jpg"
 import defaultImage from "@/public/default-placeholder.png"
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { UploadButton } from "@uploadthing/react"
+import { UploadButton } from "@/utils/uploadthing"
 import axios from 'axios'
 import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import { BeatLoader } from 'react-spinners'
-import { updateTitleDraft } from "@/utils/api"
+import { Draft } from "@prisma/client"
 
 const Preview = ({ className, setShowPreview, id }: { className: string, setShowPreview: any, id: string }) => {
-    const [draft, setDraft] = useState(null)
-    const previewRef = useRef(null)
+    const [draft, setDraft] = useState<Draft | null>(null)
+    const previewRef = useRef<HTMLDivElement | null>(null)
     const [url, setUrl] = useState('')
     const [key, setKey] = useState('')
     const [imageLoading, setImageLoading] = useState(false)
 
     const updateImage = async (imageUrl: string, imageKey: string) => {
-        console.log("imageUrl", imageUrl)
-        console.log("imageKey", imageKey)
-
         await axios.patch("/api/draft/" + id, {
             imageUrl,
             imageKey,
@@ -55,7 +51,6 @@ const Preview = ({ className, setShowPreview, id }: { className: string, setShow
     useEffect(() => {
         const getDraft = async () => {
             const { data } = await axios.get("/api/draft/" + id)
-            console.log('draft', data)
 
             setDraft(data)
             setKey(data.imageKey)
@@ -67,8 +62,8 @@ const Preview = ({ className, setShowPreview, id }: { className: string, setShow
     }, [])
 
     useEffect(() => {
-        const handleClick = (e) => {
-            if (previewRef.current && !previewRef.current.contains(e.target)) {
+        const handleClick = (e: MouseEvent) => {
+            if (previewRef.current && !previewRef.current.contains(e.target as Node)) {
                 setShowPreview(false)
             }
         }
@@ -114,15 +109,10 @@ const Preview = ({ className, setShowPreview, id }: { className: string, setShow
                                     <UploadButton
                                         endpoint="imageUploader"
                                         onClientUploadComplete={(res) => {
-                                            // Do something with the response
-                                            console.log("Files: ", res);
                                             setUrl(res[0].url)
                                             setKey(res[0].key)
                                             updateImage(res[0].url, res[0].key)
                                             setImageLoading(true)
-                                        }}
-                                        onUploadError={(error: Error) => {
-                                            // Do something with the error.
                                         }}
                                     />
                                 )}

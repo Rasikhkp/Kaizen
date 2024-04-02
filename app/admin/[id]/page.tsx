@@ -5,7 +5,7 @@ import PreviewButton from "../_components/preview-button"
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline"
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
-    const draft = await prisma.draft.findFirst({
+    const draft = await prisma.draft.findUnique({
         where: { id }
     })
 

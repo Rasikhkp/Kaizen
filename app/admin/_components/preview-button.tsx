@@ -2,26 +2,26 @@
 
 import { useState } from "react"
 import Preview from "./preview"
-import { EyeIcon } from "@heroicons/react/24/outline"
 
 
 const PreviewButton = ({ id }: { id: string }) => {
     const [showPreview, setShowPreview] = useState(false)
     return (
         <>
-            {/* <button onClick={() => setShowPreview(true)} className="text-sm"> */}
-            {/*     <EyeIcon className="w-4" /> */}
-            {/*     Preview */}
-            {/* </button> */}
+            <div className="flex gap-4">
+                <button
+                    onClick={() => setShowPreview(true)}
+                    className="flex gap-2 font-medium text-gray-600 items-center text-sm py-2 px-4 rounded-full border border-red-400 hover:bg-slate-100 transition-all"
+                >
+                    Preview
+                </button>
 
-            <button
-                onClick={() => setShowPreview(true)}
-                className="flex gap-2 items-center text-sm ml-4 hover:underline underline-offset-2"
-            >
-                <EyeIcon className="w-4" />
-                Preview
-            </button>
-
+                <button
+                    className="flex gap-2 text-white font-medium items-center text-sm py-2 px-4 rounded-full bg-red-400 hover:bg-red-500 transition-all"
+                >
+                    Publish
+                </button>
+            </div>
 
             {showPreview && (
                 <Preview setShowPreview={setShowPreview} id={id} className="fixed left-0 top-0 z-30" />
