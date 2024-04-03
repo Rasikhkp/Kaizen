@@ -11,7 +11,7 @@ const Aside = ({ draft }: { draft: Draft }) => {
             <div className='font-medium p-3'>Table of Content</div>
 
             {extractHeadings(draft.content)?.map((heading) => (
-                <ContentLink name={heading.text} className={heading.level === '1' ? 'px-3' : 'px-6'} />
+                <ContentLink key={draft.id} name={heading.text} className={heading.level === '1' ? 'px-3' : 'px-6'} />
             ))}
         </aside>
     )
