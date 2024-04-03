@@ -1,23 +1,21 @@
 "use client";
 
 import { updateDraft } from "@/redux/features/draft-slice";
-import { RootState, getAllDraft } from "@/redux/store";
+import { slugify } from "@/utils/helper-function";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ReactQuill, { Quill } from "react-quill";
+import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 
-const TextField = ({ id, }: { id: string }) => {
+const TextField = ({ id }: { id: string }) => {
     const [content, setContent] = useState('');
     const [title, setTitle] = useState('');
     const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
     const [isSaving, setIsSaving] = useState(false);
     const [isFetching, setIsFetching] = useState(true)
     const dispatch = useDispatch()
-    const draft = useSelector((state: RootState) => state.draft.values.find((val) => val.id === id))
-    const drafts = useSelector(getAllDraft)
 
     useEffect(() => {
         const fetchDraft = async () => {
@@ -63,8 +61,6 @@ const TextField = ({ id, }: { id: string }) => {
             window.removeEventListener("beforeunload", handleBeforeUnload);
     }, [isSaving]);
 
-
-
     const saveDraft = async (titleDraft: string, contentDraft: string) => {
         setIsSaving(true);
 
@@ -72,8 +68,7 @@ const TextField = ({ id, }: { id: string }) => {
             const { data } = await axios.patch("/api/draft/" + id, {
                 title: titleDraft,
                 content: contentDraft,
-                imageKey: '',
-                imageUrl: ''
+                slug: slugify(titleDraft)
             });
 
             dispatch(updateDraft(data))
@@ -139,6 +134,7 @@ const TextField = ({ id, }: { id: string }) => {
                 <>
                     <textarea
                         className="w-full pl-4 mb-4 font-serif text-5xl border-l border-white outline-none peer focus:border-slate-300"
+                        autoFocus
                         rows={1}
                         value={title}
                         onChange={(e) => updateTitle(e.target.value)}

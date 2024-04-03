@@ -2,17 +2,17 @@ import prisma from "@/prisma"
 import { NextRequest, NextResponse } from "next/server"
 
 export const GET = async () => {
-    const data = await prisma.post.findMany()
+    const data = await prisma.published.findMany()
 
     return NextResponse.json(data)
 }
 
 export const POST = async (req: NextRequest) => {
-    const { authorId, title, content } = await req.json()
+    const { authorId, title, content, imageKey, imageUrl, slug } = await req.json()
 
-    const created = await prisma.post.create({
+    const created = await prisma.published.create({
         data: {
-            authorId, content, title
+            authorId, content, title, imageKey, imageUrl, slug
         }
     })
 

@@ -8,11 +8,11 @@ export const GET = async () => {
 }
 
 export const POST = async (req: NextRequest) => {
-    const { authorId, title, content } = await req.json()
+    const { authorId } = await req.json()
 
     const created = await prisma.draft.create({
         data: {
-            authorId, content, title
+            authorId
         }
     })
 

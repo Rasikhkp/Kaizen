@@ -6,7 +6,7 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
     const { id } = params
     const { title, content } = await req.json()
 
-    const updated = await prisma.post.update({
+    const updated = await prisma.published.update({
         where: {
             id
         },
@@ -21,7 +21,7 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
 export const DELETE = async (_: NextRequest, { params }: { params: { id: string } }) => {
     const { id } = params
 
-    const deleted = await prisma.post.delete({
+    const deleted = await prisma.published.delete({
         where: {
             id
         }

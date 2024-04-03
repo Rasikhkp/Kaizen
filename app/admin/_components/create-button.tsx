@@ -14,17 +14,17 @@ const CreateButton = ({ userId }: { userId: string }) => {
 
     const createNewDraft = async () => {
         setMakingDraft(true)
-        const { data } = await axios.post("/api/draft/", { authorId: userId, title: '', content: '' })
-        dispatch(addDraft(data))
+        const { data } = await axios.post("/api/draft/", { authorId: userId })
 
-        console.log('newDraft', data)
         router.push('/admin/' + data.id)
+        dispatch(addDraft(data))
     }
+
     return (
         <button
             disabled={makingDraft}
             onClick={createNewDraft}
-            className='py-[10px] px-4 flex justify-center items-center rounded-full text-white bg-red-400 hover:bg-red-500 active:bg-red-600 transition-all text-sm'>
+            className='py-[10px] px-4 flex justify-center items-center rounded-full text-white bg-red-500 hover:bg-red-600 active:bg-red-700 transition-all text-sm'>
             {makingDraft ? (
                 <BeatLoader
                     loading={true}

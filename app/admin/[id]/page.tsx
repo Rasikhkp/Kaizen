@@ -5,9 +5,6 @@ import PreviewButton from "../_components/preview-button"
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline"
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
-    const draft = await prisma.draft.findUnique({
-        where: { id }
-    })
 
     return (
         <>
@@ -24,7 +21,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                         <PreviewButton id={id} />
                     </div>
 
-                    <TextField id={draft?.id!} />
+                    <TextField id={id} />
                 </div>
             </div>
         </>

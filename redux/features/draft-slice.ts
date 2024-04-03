@@ -26,10 +26,19 @@ export const draftSlice = createSlice({
 
                 return draft
             })
+        },
+        publishDraft: (state, action: PayloadAction<Draft>) => {
+            state.values = state.values.map((draft) => {
+                if (draft.id === action.payload.id) {
+                    return { ...draft, isPublished: action.payload.isPublished }
+                } else {
+                    return draft
+                }
+            })
         }
     }
 })
 
-export const { addDraft, deleteDraft, fillDraft, updateDraft } = draftSlice.actions
+export const { addDraft, deleteDraft, fillDraft, updateDraft, publishDraft } = draftSlice.actions
 
 export default draftSlice.reducer
