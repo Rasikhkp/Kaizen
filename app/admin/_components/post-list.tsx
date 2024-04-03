@@ -7,9 +7,12 @@ import { useEffect, useState } from 'react'
 import { fillDraft } from '@/redux/features/draft-slice'
 import axios from 'axios'
 import { BeatLoader } from 'react-spinners'
+import { useAuth } from '@clerk/nextjs'
+import { Draft } from '@prisma/client'
 
 const PostList = () => {
     const [isFetching, setIsFetching] = useState(true)
+    const { userId } = useAuth()
 
     const draftState = useSelector(getAllDraft);
     const active = useSelector(getActive)
@@ -19,8 +22,9 @@ const PostList = () => {
     useEffect(() => {
         const fetchData = async () => {
             const { data } = await axios.get("/api/draft")
+            const filterData = data.filter((draft: Draft) => draft.authorId === userId)
 
-            dispatch(fillDraft(data))
+            dispatch(fillDraft(filterData))
             setIsFetching(false)
         }
 

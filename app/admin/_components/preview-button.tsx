@@ -7,20 +7,23 @@ import { useDispatch, useSelector } from "react-redux"
 import { fillDraft, updateDraft } from "@/redux/features/draft-slice"
 import { RootState } from "@/redux/store"
 import { Draft } from "@prisma/client"
+import { useAuth } from "@clerk/nextjs"
 
 
 const PreviewButton = ({ id }: { id: string }) => {
     const [showPreview, setShowPreview] = useState(false)
     const [isPublished, setIsPublished] = useState(false)
+    const { userId } = useAuth()
     const dispatch = useDispatch()
     const draft = useSelector((state: RootState) => state.draft.values.find(draft => draft.id === id))
 
     useEffect(() => {
         const fetchDraft = async () => {
             const { data } = await axios.get("/api/draft/")
+            const filterData = data.filter((draft: Draft) => draft.authorId === userId)
 
-            setIsPublished(data.find((draft: Draft) => draft.id === id).isPublished)
-            dispatch(fillDraft(data))
+            setIsPublished(filterData.find((draft: Draft) => draft.id === id).isPublished)
+            dispatch(fillDraft(filterData))
         }
 
         fetchDraft()

@@ -3,7 +3,6 @@ import { auth } from '@clerk/nextjs'
 import CreateButton from './_components/create-button'
 import PostList from './_components/post-list'
 import PostNavigation from './_components/post-navigation'
-import prisma from '@/prisma'
 
 const page = async () => {
     const { userId } = auth()
