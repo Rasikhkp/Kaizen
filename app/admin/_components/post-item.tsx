@@ -22,7 +22,6 @@ const PostItem = ({ draft }: { draft: Draft }) => {
     const handleClickOutside = (e: MouseEvent) => {
         if (tooltipRef.current && !tooltipRef.current?.contains(e.target as Node)) {
             setOpenTooltip(false)
-            console.log("masuk")
         }
     }
 

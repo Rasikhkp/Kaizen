@@ -4,7 +4,7 @@ import Link from 'next/link'
 import prisma from '@/prisma'
 import defaultImage from '@/public/default-placeholder.png'
 import { estimateReadingTime, formatDate, htmlTagCleaner } from '@/utils/helper-function'
-import Aside from '../_components/aside'
+import TableOfContent from '../_components/table-of-content'
 
 const page = async ({ params }: { params: { slug: string } }) => {
     const draft = await prisma.draft.findFirst({
@@ -24,7 +24,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
             <div className='text-sm text-[#474E6B] font-medium mt-4 text-end px-5'>{formatDate(draft!.createdAt)} • {estimateReadingTime(htmlTagCleaner(draft!.content))}</div>
 
-            <Aside draft={draft!} />
+            <TableOfContent draft={draft!} />
 
             <article className='text-[#1D1E30] mt-10 prose-sm sm:prose mb-20 sm:px-5'>
                 <h1>{draft!.title}</h1>

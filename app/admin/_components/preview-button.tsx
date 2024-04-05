@@ -7,13 +7,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { fillDraft, updateDraft } from "@/redux/features/draft-slice"
 import { RootState } from "@/redux/store"
 import { Draft } from "@prisma/client"
-import { useAuth } from "@clerk/nextjs"
 
 
-const PreviewButton = ({ id }: { id: string }) => {
+const PreviewButton = ({ user, id }: { user: any, id: string }) => {
     const [showPreview, setShowPreview] = useState(false)
     const [isPublished, setIsPublished] = useState(false)
-    const { userId } = useAuth()
+    const userId = user?.id
     const dispatch = useDispatch()
     const draft = useSelector((state: RootState) => state.draft.values.find(draft => draft.id === id))
 

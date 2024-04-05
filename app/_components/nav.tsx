@@ -5,15 +5,12 @@ import Image from "next/image"
 import Link from "next/link"
 import Menu from "./menu"
 import { usePathname } from "next/navigation"
-import { UserButton } from "@clerk/nextjs"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs"
+import { Button } from "@/components/ui/button"
 
-const Nav = () => {
+const Nav = ({ user }: any) => {
     const pathName = usePathname();
-
-    const checkPath = (path: string) => {
-        if (pathName.match(path)) return true
-
-    }
 
     return (
         <nav
@@ -36,7 +33,16 @@ const Nav = () => {
                             <Link href={'/blog'} className={`${pathName.match(/^\/blog(?:\/|$)/) && "underline underline-offset-4"}`}>Blog</Link>
                         </>
                     ) : (
-                        <UserButton />
+                        <>
+                            <Avatar>
+                                <AvatarImage src={user?.picture || undefined} alt="avatarImage" />
+                                <AvatarFallback>{user?.given_name[0]}</AvatarFallback>
+                            </Avatar>
+
+                            <Button>
+                                <LogoutLink>log out</LogoutLink>
+                            </Button>
+                        </>
                     )}
                 </div>
 

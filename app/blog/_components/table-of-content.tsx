@@ -1,10 +1,23 @@
 "use client"
 
 import ContentLink from '@/app/_components/content-link'
-import { extractHeadings } from '@/utils/helper-function'
 import { Draft } from '@prisma/client'
 
-const Aside = ({ draft }: { draft: Draft }) => {
+const TableOfContent = ({ draft }: { draft: Draft }) => {
+    const extractHeadings = (htmlString: string) => {
+        const regex = /<h([1-2])[^>]*>(.*?)<\/h\1>/g;
+        const matches = [];
+        let match;
+
+        while ((match = regex.exec(htmlString)) !== null) {
+            matches.push({
+                level: match[1],
+                text: match[2]
+            });
+        }
+
+        return matches;
+    }
 
     return (
         <aside className='fixed text-[#1D1E30] w-[269px] text-sm hidden min-[1180px]:block right-0 top-[85px] max-h-screeen border-l border-slate-200 px-2 pt-10'>
@@ -17,4 +30,4 @@ const Aside = ({ draft }: { draft: Draft }) => {
     )
 }
 
-export default Aside
+export default TableOfContent

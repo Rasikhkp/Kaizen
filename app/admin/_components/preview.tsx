@@ -23,34 +23,25 @@ const Preview = ({
     const [url, setUrl] = useState("");
     const [key, setKey] = useState("");
     const [imageLoading, setImageLoading] = useState(false);
+    console.log("process.env.NODE_ENV", process.env.NODE_ENV)
 
     const updateImage = async (imageUrl: string, imageKey: string) => {
         await axios.patch("/api/draft/" + id, {
             imageUrl,
             imageKey,
-            content: draft?.content || "",
-            title: draft?.title || "",
         });
     };
 
     const deleteImage = async () => {
-        const options = {
-            method: "POST",
-            url: "https://uploadthing.com/api/deleteFile",
-            headers: {
-                "Content-Type": "application/json",
-                "X-Uploadthing-Api-Key": process.env.UPLOADTHING_SECRET,
-                "X-Uploadthing-Version": "6.4.0",
-            },
-            data: { fileKeys: [key] },
-        };
-
+        setImageLoading(true)
+        console.log('dipencet')
         try {
-            const { data } = await axios.request(options);
+            const { data } = await axios.delete("/api/image/" + key);
+
+            console.log(data)
             updateImage("", "");
             setUrl("");
             setKey("");
-            console.log(data);
         } catch (error) {
             console.error(error);
         }
@@ -63,6 +54,8 @@ const Preview = ({
             setDraft(data);
             setKey(data.imageKey);
             setUrl(data.imageUrl);
+            console.log('key', data.imageKey)
+            console.log('url', data.imageUrl)
         };
 
         getDraft();

@@ -9,7 +9,6 @@ const page = async () => {
         }
     })
 
-    console.log(drafts)
     return (
         <div className="w-full max-w-screen-lg min-h-screen px-4 mx-auto md:py-12">
             <div className="text-xl md:text-5xl px-5 font-semibold mb-4 md:mb-16 text-[#1E1E1E]">

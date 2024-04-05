@@ -29,8 +29,6 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
         }
     })
 
-    console.log(updated)
-
     return NextResponse.json({ updated })
 }
 

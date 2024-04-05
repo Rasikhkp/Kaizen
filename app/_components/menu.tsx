@@ -10,8 +10,6 @@ const Menu = () => {
 
     const toggle = () => {
         setOpenMenu(!openMenu)
-        console.log('di pencet')
-
         const body = document.querySelector("body")!
 
         if (body.classList.contains("overflow-clip")) {

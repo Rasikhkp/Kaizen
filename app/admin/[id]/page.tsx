@@ -3,8 +3,11 @@ import TextField from "../_components/text-field"
 import Link from "next/link"
 import PreviewButton from "../_components/preview-button"
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline"
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
+    const { getUser } = getKindeServerSession()
+    const user = await getUser();
 
     return (
         <>
@@ -18,7 +21,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                             <ArrowLongLeftIcon className="group-hover:-translate-x-1 transition-all w-4" />
                             Back
                         </Link>
-                        <PreviewButton id={id} />
+                        <PreviewButton user={user} id={id} />
                     </div>
 
                     <TextField id={id} />

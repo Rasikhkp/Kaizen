@@ -7,12 +7,11 @@ import { useEffect, useState } from 'react'
 import { fillDraft } from '@/redux/features/draft-slice'
 import axios from 'axios'
 import { BeatLoader } from 'react-spinners'
-import { useAuth } from '@clerk/nextjs'
 import { Draft } from '@prisma/client'
 
-const PostList = () => {
+const PostList = ({ user }: any) => {
     const [isFetching, setIsFetching] = useState(true)
-    const { userId } = useAuth()
+    const userId = user?.id
 
     const draftState = useSelector(getAllDraft);
     const active = useSelector(getActive)
