@@ -14,14 +14,15 @@ datasource db {
 }
 
 model Draft {
-    id          String   @id @default(auto()) @map("_id") @db.ObjectId
-    title       String   @default("")
-    content     String   @default("")
-    imageKey    String   @default("")
-    imageUrl    String   @default("")
-    slug        String   @default("")
+    id          String    @id @default(auto()) @map("_id") @db.ObjectId
+    title       String    @default("")
+    content     String    @default("")
+    imageKey    String    @default("")
+    imageUrl    String    @default("")
+    slug        String    @default("")
     authorId    String
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    isPublished Boolean  @default(false)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    publishedAt DateTime?
+    isPublished Boolean   @default(false)
 }

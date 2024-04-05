@@ -143,7 +143,7 @@ const TextField = ({ id }: { id: string }) => {
                     >
                     </textarea>
 
-                    <div className="peer-focus:after:content-['Title'] text-xs absolute -left-10 text-slate-600 top-14">
+                    <div className="peer-focus:after:content-['Title'] text-xs absolute -left-10 text-slate-600 top-20">
                         {" "}
                     </div>
 

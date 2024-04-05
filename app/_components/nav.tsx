@@ -6,10 +6,6 @@ import Link from "next/link";
 import Menu from "./menu";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
-import { Button } from "@/components/ui/button";
-import { ArrowLeftStartOnRectangleIcon } from "@heroicons/react/24/outline";
-import axios from "axios";
 import UserProfile from "./user-profile";
 import { useEffect, useRef, useState } from "react";
 
@@ -65,7 +61,7 @@ const Nav = ({ user }: any) => {
                         </>
                     ) : (
                         <>
-                            <button onClick={() => setShowProfile(!showProfile)}>
+                            <button ref={profileRef} onClick={() => setShowProfile(!showProfile)}>
                                 <Avatar>
                                     <AvatarImage src={user?.picture} alt="profile image" />
                                     <AvatarFallback>{user?.given_name[0]}</AvatarFallback>

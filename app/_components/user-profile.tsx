@@ -7,7 +7,7 @@ import React from 'react'
 
 const UserProfile = ({ user }: any) => {
     return (
-        <div className="px-4 pt-4 pb-2 w-80 drop-shadow-[0_0_5px_rgba(0,0,0,0.25)] rounded-xl bg-white font-medium" >
+        <div className="px-4 pt-4 pb-2 w-72 drop-shadow-[0_0_5px_rgba(0,0,0,0.25)] rounded-xl bg-white font-medium" >
             <div className='flex gap-4 pb-4 items-center border-b-2 border-gray-300'>
                 <Avatar>
                     <AvatarImage src={user?.picture} alt="image profile" />

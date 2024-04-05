@@ -1,9 +1,8 @@
-import prisma from "@/prisma"
 import TextField from "../_components/text-field"
 import Link from "next/link"
-import PreviewButton from "../_components/preview-button"
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
+import DraftOptions from "../_components/draft-options"
 
 const page = async ({ params: { id } }: { params: { id: string } }) => {
     const { getUser } = getKindeServerSession()
@@ -21,7 +20,7 @@ const page = async ({ params: { id } }: { params: { id: string } }) => {
                             <ArrowLongLeftIcon className="group-hover:-translate-x-1 transition-all w-4" />
                             Back
                         </Link>
-                        <PreviewButton user={user} id={id} />
+                        <DraftOptions user={user} id={id} />
                     </div>
 
                     <TextField id={id} />

@@ -9,7 +9,7 @@ import { RootState } from "@/redux/store"
 import { Draft } from "@prisma/client"
 
 
-const PreviewButton = ({ user, id }: { user: any, id: string }) => {
+const DraftOptions = ({ user, id }: { user: any, id: string }) => {
     const [showPreview, setShowPreview] = useState(false)
     const [isPublished, setIsPublished] = useState(false)
     const userId = user?.id
@@ -33,7 +33,7 @@ const PreviewButton = ({ user, id }: { user: any, id: string }) => {
             return
         }
 
-        const { data } = await axios.patch("/api/draft/" + draft.id, { isPublished: true })
+        const { data } = await axios.patch("/api/draft/" + draft.id, { publishedAt: new Date(), isPublished: true })
 
         dispatch(updateDraft(data))
         setIsPublished(true)
@@ -66,4 +66,4 @@ const PreviewButton = ({ user, id }: { user: any, id: string }) => {
     )
 }
 
-export default PreviewButton
+export default DraftOptions

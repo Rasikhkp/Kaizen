@@ -13,7 +13,7 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
 
 export const PATCH = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { id } = params
-    const { title, content, slug, imageKey, imageUrl, isPublished } = await req.json()
+    const { title, content, slug, imageKey, imageUrl, isPublished, publishedAt } = await req.json()
 
     const updated = await prisma.draft.update({
         where: {
@@ -25,7 +25,8 @@ export const PATCH = async (req: NextRequest, { params }: { params: { id: string
             slug,
             imageKey,
             imageUrl,
-            isPublished
+            isPublished,
+            publishedAt
         }
     })
 

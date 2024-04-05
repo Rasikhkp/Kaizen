@@ -57,7 +57,7 @@ const PostItem = ({ draft }: { draft: Draft }) => {
 
     const getPublishInfo = () => {
         const currentDate = new Date();
-        const publishedAt = new Date(draft.createdAt)
+        const publishedAt = new Date(draft.publishedAt)
         const diff = currentDate.getTime() - publishedAt.getTime();
 
         const seconds = Math.floor(diff / 1000);
@@ -85,26 +85,6 @@ const PostItem = ({ draft }: { draft: Draft }) => {
         }
 
     }
-
-    // const estimateReadingTime = () => {
-    //     const wordsPerMinute = 200;
-    //     const filteredWords = htmlTagCleaner(draft.content)
-    //     const wordCount = filteredWords.length;
-    //     const readingTimeMinutes = Math.ceil(wordCount / wordsPerMinute);
-    //     let readingInfo = '';
-    //
-    //     if (!draft.isPublished) {
-    //         readingInfo = `${readingTimeMinutes} min read (${wordCount} words) so far`
-    //     } else {
-    //         readingInfo = `${readingTimeMinutes} min read`
-    //     }
-    //
-    //     return readingInfo;
-    // }
-
-    // const slugifyTitle = () => {
-    //     return draft.title.toLowerCase().split(" ").join("-")
-    // }
 
     return (
         <div className='py-4 border-b border-gray-300'>

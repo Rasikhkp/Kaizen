@@ -7,7 +7,6 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 const page = async () => {
     const { getUser } = getKindeServerSession();
     const user = await getUser()
-    console.log(process.env.UPLOADTHING_SECRET)
 
     return (
         <div className='w-[600px] min-h-screen mx-auto'>
