@@ -23,7 +23,6 @@ const Preview = ({
     const [url, setUrl] = useState("");
     const [key, setKey] = useState("");
     const [imageLoading, setImageLoading] = useState(false);
-    console.log("process.env.NODE_ENV", process.env.NODE_ENV)
 
     const updateImage = async (imageUrl: string, imageKey: string) => {
         await axios.patch("/api/draft/" + id, {
@@ -34,11 +33,9 @@ const Preview = ({
 
     const deleteImage = async () => {
         setImageLoading(true)
-        console.log('dipencet')
         try {
             const { data } = await axios.delete("/api/image/" + key);
 
-            console.log(data)
             updateImage("", "");
             setUrl("");
             setKey("");
@@ -54,8 +51,6 @@ const Preview = ({
             setDraft(data);
             setKey(data.imageKey);
             setUrl(data.imageUrl);
-            console.log('key', data.imageKey)
-            console.log('url', data.imageUrl)
         };
 
         getDraft();
