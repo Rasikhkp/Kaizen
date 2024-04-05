@@ -56,6 +56,10 @@ const PostItem = ({ draft }: { draft: Draft }) => {
     }
 
     const getPublishInfo = () => {
+        if (!draft.publishedAt) {
+            return
+        }
+
         const currentDate = new Date();
         const publishedAt = new Date(draft.publishedAt)
         const diff = currentDate.getTime() - publishedAt.getTime();
