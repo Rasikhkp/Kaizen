@@ -17,7 +17,7 @@ const Post = ({ className, draft }: { className?: string, draft: Draft }) => {
             <div className='px-5 mt-3'>
                 <Link href={`/blog/${draft.slug}`} className='text-sm hover:underline hover:underline-offset-4 text-[#303450] md:text-2xl font-bold'>{draft.title}</Link>
                 <div className='text-xs md:text-base text-slate-700 mt-3'>{htmlTagCleaner(draft.content).slice(0, 100)}...</div>
-                <div className='text-xs text-slate-600 mt-3'>{formatDate(draft.publishedAt)}</div>
+                <div className='text-xs text-slate-600 mt-3'>{formatDate(draft.publishedAt || new Date())}</div>
             </div>
         </div>
     )
