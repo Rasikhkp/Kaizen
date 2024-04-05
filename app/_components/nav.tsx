@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 
 const Nav = ({ user }: any) => {
     const [showProfile, setShowProfile] = useState(false)
-    const profileRef = useRef<HTMLDivElement | null>(null)
+    const profileRef = useRef<HTMLButtonElement | null>(null)
     const pathName = usePathname();
 
     useEffect(() => {
