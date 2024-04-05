@@ -22,7 +22,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
                 <Image src={draft?.imageUrl || defaultImage} fill alt="title image" className='object-cover' />
             </div>
 
-            <div className='text-sm text-[#474E6B] font-medium mt-4 text-end px-5'>{formatDate(draft!.publishedAt)} • {estimateReadingTime(htmlTagCleaner(draft!.content))}</div>
+            <div className='text-sm text-[#474E6B] font-medium mt-4 text-end px-5'>{formatDate(draft!.publishedAt || new Date())} • {estimateReadingTime(htmlTagCleaner(draft!.content))}</div>
 
             <TableOfContent draft={draft!} />
 
