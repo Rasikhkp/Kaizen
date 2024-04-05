@@ -26,8 +26,8 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
             <TableOfContent draft={draft!} />
 
-            <article className='text-[#1D1E30] mt-10 prose-sm sm:prose mb-20 sm:px-5'>
-                <h1>{draft!.title}</h1>
+            <h1 className='text-[#1D1E30] sm:px-5 sm:text-4xl text-2xl font-semibold my-10 sm:font-bold'>{draft!.title}</h1>
+            <article className=' text-[#1D1E30] prose-sm prose-h1:text-xl prose-h2:text-lg sm:prose-h1:text-2xl sm:prose-h2:text-xl sm:prose mb-20 sm:px-5'>
                 <div id='body' dangerouslySetInnerHTML={{ __html: draft!.content }}></div>
             </article>
         </div>
